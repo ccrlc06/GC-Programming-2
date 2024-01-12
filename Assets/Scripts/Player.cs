@@ -25,22 +25,36 @@ public class Player : MonoBehaviour
         {
             transform.Rotate(0.0f, 0.0f, turnSpeed * dt);
         }
+        // The quaternion stores our rotation and the vector stores our forward direction.
+        // We're using to seeing an arrow pointing along +x when rotation is 0, so we use Vector3.right
+        // If we instead wanted to point vertically with a rotation of 0, then we use Vector3.up.
+        //Vector3 direction = transform.rotation * Vector3.right;
+
+        // The automatic way to do this is to use transform.right/up/forward:
+        // If we want +x to be our "forward direction" we use transform.right
+        // If we want +y to be our "forward direction" we use transform.up
+        // If we want +z to be our "forward direction" we use transform.forward
+
+        Vector3 forward = transform.right;
+        Vector3 right = transform.up * -1.0f;
+        Debug.DrawLine(transform.position, transform.position + forward * 10.0f, Color.red);
+        Debug.DrawLine(transform.position, transform.position + right * 10.0f, Color.green);
 
         if (Input.GetKey(KeyCode.W))
         {
-            velocity += Vector3.up;
+            velocity += forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            velocity -= Vector3.up;
+            velocity -= forward;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            velocity -= Vector3.right;
+            velocity -= right;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            velocity += Vector3.right;
+            velocity += right;
         }
 
         transform.position += velocity * moveSpeed * dt;
