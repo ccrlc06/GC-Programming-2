@@ -17,6 +17,15 @@ public class Player : MonoBehaviour
         float dt = Time.deltaTime;
         Vector3 velocity = Vector3.zero;
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(0.0f, 0.0f, -turnSpeed * dt);
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(0.0f, 0.0f, turnSpeed * dt);
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
             velocity += Vector3.up;
