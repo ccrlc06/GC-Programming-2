@@ -37,8 +37,13 @@ public class Player : MonoBehaviour
 
         Vector3 forward = transform.right;
         Vector3 right = transform.up * -1.0f;
-        Debug.DrawLine(transform.position, transform.position + forward * 10.0f, Color.red);
+
+        // Convert from direction to angle and angle to direction
+        float angleRad = Mathf.Atan2(forward.y, forward.x);
+        Vector3 direction = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+        Debug.DrawLine(transform.position, transform.position + direction * 10.0f, Color.red);
         Debug.DrawLine(transform.position, transform.position + right * 10.0f, Color.green);
+        Debug.Log(angleRad * Mathf.Rad2Deg);
 
         if (Input.GetKey(KeyCode.W))
         {
