@@ -124,7 +124,9 @@ public class Player : MonoBehaviour
 
     void CreateGrenade(Vector3 direction, float speed)
     {
-        CreateProjectile(direction, speed, Color.blue);
+        GameObject grenade = CreateProjectile(direction, speed, Color.blue);
+        grenade.GetComponent<Explosion>().weaponType = weaponType;
+        Destroy(grenade, 0.5f);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
